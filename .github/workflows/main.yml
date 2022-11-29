@@ -8,8 +8,9 @@ jobs:
   autoFuzz:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@main
       - name: setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4.2.0
         with:
           python-version: 3.8
       - name: Install dependencies
