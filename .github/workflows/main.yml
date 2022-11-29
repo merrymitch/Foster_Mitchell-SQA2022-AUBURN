@@ -1,17 +1,21 @@
-name: "Fuzzer"
-on: workflow_dispatch
+name: Fuzzer
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
-  build:
+  autoFuzz:
     runs-on: unbuntu-latest
     steps:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8 #install the python needed
-          - name: Install dependencies
-          run: |
-            python3 -m pip install --upgrade pip
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
       - name: run fuzzer 
         run: |
-          python3 fuzz.py
+          python3 ../TestOrchestrator4ML-main/fuzz.py
         shell: bash
