@@ -16,8 +16,15 @@ jobs:
           python-version: "3.10"
           
       - name: Install dependencies
-        run: pip3 install --upgrade pip
-        
+        run: |
+          pip3 install --upgrade pip
+          pip3 install astdump
+          pip3 install pandas
+          pip3 install tensorflow
+          pip3 install scikit-learn
+          pip3 install matplotlib
+          pip3 install keras
+          
       - name: run fuzzer 
         working-directory: ./TestOrchestrator4ML-main
         run: python3 fuzz.py
