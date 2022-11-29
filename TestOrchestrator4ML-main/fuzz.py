@@ -5,11 +5,11 @@
 # Due Date:    1 December 2022
 # Run:         fuzz.py will be automatically executed from GitHub actions
 
-from TestOrchestrator4ML-main.detection.py_parser import checkMetricNames 
-from TestOrchestrator4ML-main.generation.py_parser import checkAlgoNames
-from TestOrchestrator4ML-main.generation.main import generateAttack
-from TestOrchestrator4ML-main.label_perturbation_attack.cliffsDelta import runs
-from TestOrchestrator4ML-main.label_perturbation_attack.knn import euc_dist
+from detection.py_parser import checkMetricNames 
+from generation.py_parser import checkAlgoNames
+from generation.main import generateAttack
+from label_perturbation_attack.cliffsDelta import runs
+from label_perturbation_attack.knn import euc_dist
 
 def fuzzCheckMetricNames():
     fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, 3.14159, {None}, [None], b'0000', {}, []]
