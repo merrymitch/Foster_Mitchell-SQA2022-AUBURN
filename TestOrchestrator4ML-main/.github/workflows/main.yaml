@@ -14,3 +14,4 @@ jobs:
       - name: run fuzzer 
         run: |
           python3 fuzz.py
+        shell: bash
