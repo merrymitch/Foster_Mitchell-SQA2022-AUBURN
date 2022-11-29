@@ -19,5 +19,5 @@ jobs:
         run: pip3 install --upgrade pip
         
       - name: run fuzzer 
-        run: cd /TestOrchestrator4ML-main
+        run: cd /home/runner/work/Foster_Mitchell-SQA2022-AUBURN/TestOrchestrator4ML-main
       - run: ls
