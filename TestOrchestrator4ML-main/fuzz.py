@@ -5,6 +5,7 @@
 # Due Date:    1 December 2022
 # Run:         fuzz.py will be automatically executed from GitHub actions or 'python3 fuzz.py'
 
+import os
 import detection.constants as constants
 from detection.py_parser import checkMetricNames 
 from generation.py_parser import checkAlgoNames
@@ -14,7 +15,7 @@ from label_perturbation_attack.knn import euc_dist
 
 def fuzzCheckMetricNames():
     # Initialize a wide variety of inputs to try on checkMetricNames
-    fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, 3.14159, {None}, [None], {0}, [0], b'0000', int(b'0000'), {}, [], "\"`'><script>\\xE2\\x80\\xA8javascript:alert(1)</script>'", '', [[]]]
+    fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, {0, 5, 10.3, 'RANDOMSTRING'}, 3.14159, {None}, [None], {0}, [0], b'0000', int(b'0000'), {}, [], "\"`'><script>\\xE2\\x80\\xA8javascript:alert(1)</script>'", '', [[]]]
     print("Start fuzzing checkMetricNames...")
     # Loop through all the input values and determine if they create errors
     for input in fuzzValues:
@@ -27,7 +28,7 @@ def fuzzCheckMetricNames():
 
 def fuzzCheckAlgoNames():
     # Initialize a wide variety of inputs to try on checkAlgoNames
-    fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, 3.14159, {None}, [None], {0}, [0], b'0000', int(b'0000'), {}, [], "\"`'><script>\\xE2\\x80\\xA8javascript:alert(1)</script>'", '', [[]]]
+    fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, {0, 5, 10.3, 'RANDOMSTRING'}, 3.14159, {None}, [None], {0}, [0], b'0000', int(b'0000'), {}, [], "\"`'><script>\\xE2\\x80\\xA8javascript:alert(1)</script>'", '', [[]]]
     print("Start fuzzing checkAlgoNames...")
     # Loop through all the input values and determine if they create errors
     for input in fuzzValues:
@@ -39,11 +40,32 @@ def fuzzCheckAlgoNames():
     print("Finish fuzzing checkAlgoNames...")
 
 def fuzzGenerateAttack():
+    directory = os.getcwd() # Use current directory as an input directory for this function
+    # Initialize a wide variety of inputs to try on generateAttack
+    fuzzValue1 = [directory, 'THIS/IS/WHAT/A/PATH/LOOKS/LIKE']
+    fuzzValue2 = [3.14159, 0, 22, None, 'RANDOMSTRING', -8.9, {}, []]
     print("Start fuzzing generateAttack...")
+    # Loop through various combinations of the input values and determine if they create errors
+    for val1 in fuzzValue1:
+        for val2 in fuzzValue2:
+            try:
+                generateAttack(val1, val2)
+                print("generateAttack passed with inputs: " + str(val1) + " and " + str(val2))
+            except:
+                print("generateAttack failed with inputs: " + str(val1) + " and " + str(val2))
     print("Finish fuzzing generateAttack...")
 
 def fuzzRuns():
+    # Initialize a wide variety of inputs to try on runs
+    fuzzValues = [0, None, 'RANDOMSTRING', {'RANDOM': 'DICTIONARY'}, {0, 5, 10.3, 'RANDOMSTRING'}, 3.14159, {None}, [None], {0}, [0], b'0000', int(b'0000'), {}, [], "\"`'><script>\\xE2\\x80\\xA8javascript:alert(1)</script>'", '', [[]]]
     print("Start fuzzing runs...")
+    # Loop through all the input values and determine if they create errors
+    for input in fuzzValues:
+        try: 
+            runs(input)
+            print("runs passed with input" + str(input))
+        except:
+            print("runs failed with input: " + str(input)) 
     print("Finish fuzzing runs...")
 
 def fuzzEuc_Dist():
@@ -65,8 +87,8 @@ def main():
     print("*** Begin Fuzzer ***")
     fuzzCheckMetricNames()
     fuzzCheckAlgoNames()
-    #fuzzGenerateAttack()
-    #fuzzRuns()
+    fuzzGenerateAttack()
+    fuzzRuns()
     fuzzEuc_Dist()
     print("*** End Fuzzer ***")
 
