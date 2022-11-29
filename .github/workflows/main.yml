@@ -19,4 +19,5 @@ jobs:
         run: pip3 install --upgrade pip
         
       - name: run fuzzer 
-        run: python3 /TestOrchestrator4ML-main/fuzz.py
+        run: cd /TestOrchestrator4ML-main
+      - run: ls
