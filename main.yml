@@ -17,8 +17,6 @@ jobs:
           
       - name: Install dependencies
         run: pip3 install --upgrade pip
-        shell: bash
         
       - name: run fuzzer 
-        run: python3 fuzz.py
-        shell: bash
+        run: python3 /TestOrchestrator4ML-main/fuzz.py
