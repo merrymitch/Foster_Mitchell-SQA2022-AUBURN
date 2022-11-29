@@ -15,8 +15,6 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
+          pip3 install --upgrade pip
       - name: run fuzzer 
-        run: |
-          python3 ../../TestOrchestrator4ML-main/fuzz.py
-        shell: bash
+        run: python3 ../TestOrchestrator4ML-main/fuzz.py
