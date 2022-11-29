@@ -9,7 +9,7 @@ import detection.constants as constants
 from detection.py_parser import checkMetricNames 
 from generation.py_parser import checkAlgoNames
 from generation.main import generateAttack
-#from label_perturbation_attack.cliffsDelta import runs
+from label_perturbation_attack.cliffsDelta import runs
 from label_perturbation_attack.knn import euc_dist
 
 def fuzzCheckMetricNames():
@@ -59,6 +59,8 @@ def main():
     print("*** Begin Fuzzer ***")
     fuzzCheckMetricNames()
     fuzzCheckAlgoNames()
+    #fuzzGenerateAttack()
+    #fuzzRuns()
     fuzzEuc_Dist()
     print("*** End Fuzzer ***")
 
