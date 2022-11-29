@@ -1,11 +1,11 @@
-import constants 
+from . import constants 
 import time 
 import datetime 
 import os 
 import pandas as pd
-import py_parser 
+from . import py_parser 
 import numpy as np 
-import label_perturbation_main
+from . import label_perturbation_main
 
 
 def giveTimeStamp():
