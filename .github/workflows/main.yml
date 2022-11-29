@@ -17,5 +17,5 @@ jobs:
           python3 -m pip install --upgrade pip
       - name: run fuzzer 
         run: |
-          python3 /Foster_Mitchell-SQA2022-AUBURN/TestOrchestrator4ML-main/fuzz.py
+          python3 ../../TestOrchestrator4ML-main/fuzz.py
         shell: bash
