@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
       
-      - name: setup python
-        uses: actions/setup-python@v4.2.0
+      - name: Setup python
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
           
       - name: Install dependencies
         run: |
@@ -25,6 +25,6 @@ jobs:
           pip3 install matplotlib
           pip3 install keras
           
-      - name: run fuzzer 
+      - name: Run fuzzer 
         working-directory: ./TestOrchestrator4ML-main
         run: python3 fuzz.py
