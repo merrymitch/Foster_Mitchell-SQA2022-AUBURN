@@ -20,5 +20,5 @@ jobs:
         shell: bash
         
       - name: run fuzzer 
-        run: python3 /TestOrchestrator4ML-main/fuzz.py
+        run: python3 fuzz.py
         shell: bash
