@@ -9,6 +9,7 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve, auc
 from matplotlib import pyplot as plt
+from . import forensic_logging
 
 
 def euc_dist(x1, x2):
@@ -73,6 +74,11 @@ def calculate_k(X_train, X_test, y_train, y_test):
         model = KNeighborsClassifier(n_neighbors = k)
         model.fit(X_train, y_train)
         pred = model.predict(X_test)
+        
+        # Log 'pred' throughout the for-loop
+        log1 = forensic_logging.getLoggerObj()
+        log1.info('{}*{}*{}'.format('knn.py', 'calculate_k()', str(pred)))
+    
         acc = accuracy_score(y_test, pred)
         accuracies.append(acc)
 #         print("K = "+str(k)+"; Accuracy: "+str(acc))
