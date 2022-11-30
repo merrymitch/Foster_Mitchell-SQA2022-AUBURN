@@ -3,7 +3,7 @@ Cliffs Delta code from Dr. menzies
 '''
 
 from __future__ import division
-import forensic_logging
+from . import forensic_logging
 
 def cliffsDelta(lst1,lst2,
                 dull = [0.147, # small
