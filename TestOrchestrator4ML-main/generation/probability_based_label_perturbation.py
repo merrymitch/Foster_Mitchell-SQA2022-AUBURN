@@ -5,8 +5,13 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score
+from . import forensic_logging
 
 def generate_malicious_instance(X_train, y_train, g):
+
+    # Initialize the logger
+    log3 = forensic_logging.getLoggerObj()
+
     M = X_train.shape[1]
     generated_X = [0] * M
     no_of_elements_in_bin = int(len(y_train)/g)
@@ -28,6 +33,9 @@ def generate_malicious_instance(X_train, y_train, g):
         generated_X[j] = attribute_prob[random.randrange(0, g)]
      
     generated_y = 1  # consider 1 as attacking class
+
+    # Once the main portion of the function is complete log the values of generated_X and generated_y
+    log3.debug('{}*{}*{}*{}'.format('probability_based_label_perturbation.py', 'generate_malicious_instance', str(generated_X), str(generated_y)))
     
     return generated_X, generated_y
     

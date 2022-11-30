@@ -2,6 +2,7 @@ import ast
 import os 
 from . import constants 
 import astdump
+from . import forensic_logging
 
 def getPythonParseObject( pyFile ): 
     try:
@@ -12,6 +13,10 @@ def getPythonParseObject( pyFile ):
     return full_tree 
     
 def getImport(pyTree): 
+
+    # Initialize the logger
+    log0 = forensic_logging.getLoggerObj()
+
     import_list = []
     for stmt_ in pyTree.body:
         for node_ in ast.walk(stmt_):
@@ -24,6 +29,10 @@ def getImport(pyTree):
                     for name in node_.names:
                         import_list.append( (name.name.split('.')[0] ) )
 #     print("import list: ", import_list)
+
+    # Once the main body of the function is complete log import_list
+    log0.debug('{}*{}*{}'.format('py_parser.py', 'getImport', str(import_list)))
+
     return import_list 
     
 def getFunctionDetailsForClaases(pyTree):
@@ -51,9 +60,13 @@ def getFunctionDetailsForClaases(pyTree):
                                     func_list.append(each_list)      
     return func_list
         
-    
+
 
 def getFunctionAssignments(class_body):
+
+    # Initialize the logger
+    log1 = forensic_logging.getLoggerObj()
+
     func_list = []
     for stmt_ in class_body:
         for node_ in ast.walk(stmt_):
@@ -70,6 +83,10 @@ def getFunctionAssignments(class_body):
                         func_name_dict  = funcName.__dict__
                         func_name = func_name_dict[constants.ATTRIB_KW] 
                         func_list.append(func_name )  
+
+    # Once the main body of the function is complete log func_list
+    log1.debug('{}*{}*{}'.format('py_parser.py', 'getFunctionAssignments', str(func_list)))
+    
     return func_list
 
         

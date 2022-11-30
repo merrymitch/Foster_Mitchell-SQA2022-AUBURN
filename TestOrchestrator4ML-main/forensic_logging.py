@@ -8,6 +8,6 @@
 import logging
 
 def getLoggerObj():
-    logging.basicConfig(filename='../../FORENSIC_LOGS.LOG', level=logging.INFO, format='%(asctime)s:::%(name)s:::%(levelname)s:::%(message)s', datefmt='%d-%b-%y %H:%M:%S') 
-    loggerObj = logging.getLogger('forensic-logger') 
-    return loggerObj 
+    logging.basicConfig(filename='../../FORENSICS.LOG', level=logging.INFO, format='%(asctime)s:%(name)s:%(levelname)s:%(message)s', datefmt='%d-%b-%y %H-%M-%S')
+    loggerObj = logging.getLogger('project-logger')
+    return loggerObj

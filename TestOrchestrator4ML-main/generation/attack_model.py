@@ -14,11 +14,14 @@ from sklearn.metrics import roc_curve, auc
 from matplotlib import pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense
+from . import forensic_logging
 
 def calculate_k(X_train, X_test, y_train, y_test):
     """
     Training our model on all possible K values (odd) from 3 to 10  
     """
+    # Initialize the logger
+    log2 = forensic_logging.getLoggerObj()
     kVals = np.arange(3,10,2)
     accuracies = []
     for k in kVals:
@@ -27,6 +30,8 @@ def calculate_k(X_train, X_test, y_train, y_test):
         pred = model.predict(X_test)
         acc = accuracy_score(y_test, pred)
         accuracies.append(acc)
+    # Once the for-loop is finished log the value of accuracies
+    log2.debug('{}*{}*{}'.format('attack_model.py', 'calculate_k', str(accuracies)))
     max_index = accuracies.index(max(accuracies))
     print("selected k = " + str(2 * (max_index + 1) + 1))
     return (2 * (max_index + 1) + 1)
