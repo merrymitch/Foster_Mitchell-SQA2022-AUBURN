@@ -2,6 +2,8 @@
 Cliffs Delta code from Dr. menzies
 '''
 
+import forensic_logging
+
 from __future__ import division
 
 def cliffsDelta(lst1,lst2,
@@ -27,6 +29,11 @@ def cliffsDelta(lst1,lst2,
 def runs(lst):
   "Iterator, chunks repeated values"
   for j,two in enumerate(lst):
+    
+    # Log 'j' and 'two' throughout the for-loop
+    log0 = forensic_logging.getLoggerObj()
+    log0.info('{}*{}*{}*{}'.format('cliffsDelta.py', 'runs()', str(j), str(two)))
+    
     if j == 0:
       one,i = two,0
     if one!=two:
