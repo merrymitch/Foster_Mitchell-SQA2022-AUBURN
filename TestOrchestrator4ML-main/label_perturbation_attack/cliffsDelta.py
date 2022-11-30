@@ -2,9 +2,8 @@
 Cliffs Delta code from Dr. menzies
 '''
 
-#import forensic_logging
-
 from __future__ import division
+import forensic_logging
 
 def cliffsDelta(lst1,lst2,
                 dull = [0.147, # small
@@ -31,8 +30,8 @@ def runs(lst):
   for j,two in enumerate(lst):
     
     # Log 'j' and 'two' throughout the for-loop
-    #log0 = forensic_logging.getLoggerObj()
-    #log0.info('{}*{}*{}*{}'.format('cliffsDelta.py', 'runs()', str(j), str(two)))
+    log0 = forensic_logging.getLoggerObj()
+    log0.info('{}*{}*{}*{}'.format('cliffsDelta.py', 'runs()', str(j), str(two)))
     
     if j == 0:
       one,i = two,0
